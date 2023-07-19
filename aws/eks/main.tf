@@ -137,12 +137,13 @@ resource "kubernetes_config_map" "aws_auth" {
 }
 
 data "aws_eks_cluster" "cluster" {
-  name = module.eks_fargate.cluster_id
+  name = aws_eks_cluster.cluster.name
 }
 
 data "aws_eks_cluster_auth" "cluster" {
-  name = module.eks_fargate.cluster_id
+  name = aws_eks_cluster.cluster.name
 }
+
 
 provider "kubernetes" {
   host                   = data.aws_eks_cluster.cluster.endpoint
