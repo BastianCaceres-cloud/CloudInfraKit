@@ -1,0 +1,89 @@
+openapi: "3.0.1"
+info:
+  title: "JSON Placeholder API"
+  description: "See https://jsonplaceholder.typicode.com/"
+  version: "1.0.0"
+servers:
+- url: "https://wlpdx3gbke.execute-api.us-east-1.amazonaws.com/{basePath}"
+  variables:
+    basePath:
+      default: "desarrollo"
+paths:
+  /posts/{id}:
+    get:
+      operationId: "getPost"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "404":
+          description: "404 response"
+          content: {}
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Post"
+      x-amazon-apigateway-integration:
+        httpMethod: "GET"
+        uri: "https://${stageVariables.url}/posts/{id}"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.path.id: "method.request.path.id"
+        passthroughBehavior: "when_no_match"
+        type: "http"
+  /posts:
+    get:
+      operationId: "getPosts"
+      parameters:
+      - name: "id"
+        in: "query"
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostsList"
+      x-amazon-apigateway-integration:
+        httpMethod: "GET"
+        uri: "https://${stageVariables.url}/posts"
+        responses:
+          default:
+            statusCode: "200"
+        requestParameters:
+          integration.request.querystring.id: "method.request.querystring.id"
+        passthroughBehavior: "when_no_match"
+        type: "http"
+components:
+  schemas:
+    Post:
+      required:
+      - "completed"
+      - "id"
+      - "title"
+      - "userId"
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int32"
+        userId:
+          type: "integer"
+          format: "int32"
+        title:
+          type: "string"
+        completed:
+          type: "string"
+    PostsList:
+      type: "array"
+      items:
+        $ref: "#/components/schemas/Post"
