@@ -20,3 +20,29 @@ variable "subnet_ids" {
   description = "List of subnet IDs for the EKS cluster"
   type        = list(string)
 }
+
+variable "aws_auth_roles" {
+  description = "List of IAM roles to add to the aws-auth configmap"
+  type = list(object({
+    rolearn  = string
+    username = string
+    groups   = list(string)
+  }))
+  default = []
+}
+
+variable "aws_auth_users" {
+  description = "List of IAM users to add to the aws-auth configmap"
+  type = list(object({
+    userarn  = string
+    username = string
+    groups   = list(string)
+  }))
+  default = []
+}
+
+variable "aws_auth_accounts" {
+  description = "List of AWS account IDs to add to the aws-auth configmap"
+  type        = list(string)
+  default     = []
+}

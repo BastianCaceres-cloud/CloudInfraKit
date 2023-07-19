@@ -94,3 +94,44 @@ resource "aws_eks_fargate_profile" "example" {
     aws_iam_role_policy_attachment.fargate_pod_execution_role_policy_attachment
   ]
 }
+
+
+locals {
+  aws_auth_roles_yaml = [for role in var.aws_auth_roles : <<EOF
+  - rolearn: ${role.rolearn}
+    username: ${role.username}
+    groups:
+      - ${join("\n      - ", role.groups)}
+  EOF
+  ]
+
+  aws_auth_users_yaml = [for user in var.aws_auth_users : <<EOF
+  - userarn: ${user.userarn}
+    username: ${user.username}
+    groups:
+      - ${join("\n      - ", user.groups)}
+  EOF
+  ]
+
+  aws_auth_accounts_yaml = [for account in var.aws_auth_accounts : <<EOF
+  - ${account}
+  EOF
+  ]
+}
+
+resource "kubernetes_config_map" "aws_auth" {
+  metadata {
+    name      = "aws-auth"
+    namespace = "kube-system"
+  }
+
+  data = {
+    mapRoles    = join("\n", local.aws_auth_roles_yaml)
+    mapUsers    = join("\n", local.aws_auth_users_yaml)
+    mapAccounts = join("\n", local.aws_auth_accounts_yaml)
+  }
+
+  depends_on = [
+    aws_eks_cluster.cluster,
+  ]
+}
