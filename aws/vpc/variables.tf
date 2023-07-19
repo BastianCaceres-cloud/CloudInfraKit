@@ -60,3 +60,35 @@ variable "tags" {
     Environment = "test"
   }
 }
+
+variable "enable_nat_gateway" {
+  description = "Determina si se debe crear un NAT Gateway"
+  type        = bool
+  default     = false
+}
+
+variable "single_nat_gateway" {
+  description = "Si es verdadero, se creará un solo NAT Gateway para todas las subredes"
+  type        = bool
+  default     = false
+}
+
+variable "one_nat_gateway_per_az" {
+  description = "Si es verdadero, se creará un NAT Gateway por zona de disponibilidad"
+  type        = bool
+  default     = false
+}
+
+
+variable "create_igw" {
+  description = "Determina si se debe crear un Internet Gateway"
+  type        = bool
+  default     = false
+}
+
+variable "create_and_associate_route_tables" {
+  description = "Controla si se deben crear y asociar las tablas de enrutamiento"
+  type        = bool
+  default     = false
+}
+
