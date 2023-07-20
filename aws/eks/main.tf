@@ -136,12 +136,26 @@ resource "kubernetes_config_map" "aws_auth" {
   ]
 }
 
+
+resource "null_resource" "delay" {
+  depends_on = [aws_eks_cluster.cluster]
+
+  provisioner "local-exec" {
+    command = "sleep 120"
+  }
+}
+
+
 data "aws_eks_cluster" "cluster" {
   name = aws_eks_cluster.cluster.name
+
+  depends_on = [null_resource.delay]
 }
 
 data "aws_eks_cluster_auth" "cluster" {
   name = aws_eks_cluster.cluster.name
+
+  depends_on = [null_resource.delay]
 }
 
 
