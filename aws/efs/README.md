@@ -4,31 +4,6 @@ Este módulo crea un sistema de archivos EFS, un punto de acceso EFS, y el grupo
 
 ## Uso
 
-```hcl
-module "efs" {
-  source                     = "git::https://x"
-  region                     = "us-east-1"
-  vpc_id                     = "vpc-xxxxxxxxxxxx"
-  subnet_ids                 = ["subnet-xxxxxxxxxxxx", "subnet-xxxxxxxxxxxx", "subnet-xxxxxxxxxxxx"]
-  cidr_block                 = "0.0.0.0/0"
-  creation_token             = "WordPress-on-Fargate"
-  volume_name                = "WordpressVolume"
-  posix_user_gid             = 1000
-  posix_user_uid             = 1000
-  root_directory_path        = "/bitnami"
-  creation_info_owner_gid    = 1000
-  creation_info_owner_uid    = 1000
-  creation_info_permissions  = "777"
-  security_group_name        = "WordPress-on-Fargate"
-  security_group_description = "WordPress-on-Fargate"
-}
-
-
-
-¡Por supuesto! Aquí tienes el archivo README.md actualizado con las entradas y las salidas como una lista de puntos:
-
-markdown
-Copy code
 # Módulo AWS EFS para Terraform
 
 Este módulo crea un sistema de archivos EFS, un punto de acceso EFS, y el grupo de seguridad y los targets de montaje necesarios para un cluster EKS Fargate.
@@ -37,7 +12,7 @@ Este módulo crea un sistema de archivos EFS, un punto de acceso EFS, y el grupo
 
 ```hcl
 module "efs" {
-  source                     = "git:x"
+  source                     = "git::https://github.com/BastianCaceres-cloud/CloudInfraKit.git//aws/efs?ref=main"
   region                     = "us-east-1"
   vpc_id                     = "vpc-xxxxxxxxxxxx"
   subnet_ids                 = ["subnet-xxxxxxxxxxxx", "subnet-xxxxxxxxxxxx", "subnet-xxxxxxxxxxxx"]
