@@ -1,7 +1,7 @@
 variable "region" {
   description = "AWS region"
   type        = string
-  default     = "us-east1-1"
+  default     = "us-east-1"
 }
 
 variable "lambda_function_name" {
