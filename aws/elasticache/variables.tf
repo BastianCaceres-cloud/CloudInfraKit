@@ -32,3 +32,18 @@ variable "subnet_ids" {
   description = "List of subnet IDs to associate with the subnet group"
   type        = list(string)
 }
+
+
+# Variables
+
+variable "parameter_group_family" {
+  description = "Family of the ElastiCache parameter group"
+  type        = string
+  default     = "redis7.0"
+}
+
+variable "parameter_group_name" {
+  description = "Name of the ElastiCache parameter group"
+  type        = string
+  default     = "custom-redis7-group"
+}
