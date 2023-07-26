@@ -13,7 +13,22 @@ module "elasticache" {
   engine_version       = "5.0.6"
   subnet_group_name    = "mi-subnet-group"
   security_group_ids   = ["sg-123456789"]
+  subnet_ids           = ["subnet-abcdefgh", "subnet-ijklmnop"]
 }
+
+
+Entradas
+subnet_ids: Lista de IDs de subredes a asociar con el grupo de subredes (requerido, tipo list(string))
+
+Espero que esto te ayude. Si tienes alguna otra pregunta, por favor déjame saber.
+
+Share
+Save
+
+
+
+
+
 
 
 

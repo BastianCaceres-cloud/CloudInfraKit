@@ -12,3 +12,5 @@ output "elasticache_cluster_port" {
   description = "The port of the ElastiCache cluster"
   value       = aws_elasticache_cluster.example.cache_nodes.0.port
 }
+
+
