@@ -13,5 +13,5 @@ resource "aws_elasticache_cluster" "example" {
   engine_version       = var.engine_version
   subnet_group_name    = aws_elasticache_subnet_group.example.name
   security_group_ids   = var.security_group_ids
-  parameter_group_name = "default.redis5.0"
+  parameter_group_name = "default.redis7.0"
 }
