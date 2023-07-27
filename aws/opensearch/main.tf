@@ -1,3 +1,12 @@
+provider "aws" {
+  region = var.region
+}
+
+data "aws_region" "current" {}
+
+data "aws_caller_identity" "current" {}
+
+
 resource "aws_elasticsearch_domain" "main" {
   domain_name           = var.domain_name
   elasticsearch_version = var.engine_version
