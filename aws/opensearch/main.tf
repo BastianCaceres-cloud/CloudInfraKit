@@ -2,9 +2,9 @@ provider "aws" {
   region = var.region
 }
 
-resource "aws_opensearchservice_domain" "main" {
+resource "aws_elasticsearch_domain" "main" {
   domain_name           = var.domain_name
-  engine_version        = var.engine_version
+  elasticsearch_version = var.engine_version
 
   cluster_config {
     instance_type = var.instance_type
@@ -21,10 +21,10 @@ resource "aws_opensearchservice_domain" "main" {
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Action": "opensearch:*",
+      "Action": "es:*",
       "Principal": "*",
       "Effect": "Allow",
-      "Resource": "arn:aws:opensearch:${aws_region.current.name}:${data.aws_caller_identity.current.account_id}:domain/${aws_opensearchservice_domain.main.domain_name}/*"
+      "Resource": "arn:aws:es:${aws_region.current.name}:${data.aws_caller_identity.current.account_id}:domain/${aws_elasticsearch_domain.main.domain_name}/*"
     }
   ]
 }
@@ -32,3 +32,25 @@ POLICIES
 
   depends_on = [aws_iam_role.example]
 }
+
+resource "aws_iam_role" "example" {
+  name = "example_role"
+
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": "sts:AssumeRole",
+      "Principal": {
+        "Service": "es.amazonaws.com"
+      },
+      "Effect": "Allow",
+      "Sid": ""
+    }
+  ]
+}
+EOF
+}
+
+
