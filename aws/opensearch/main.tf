@@ -21,7 +21,7 @@ resource "aws_elasticsearch_domain" "main" {
     volume_size = var.volume_size
   }
 
-  access_policies = <<POLICIES
+access_policies = <<POLICIES
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -29,7 +29,7 @@ resource "aws_elasticsearch_domain" "main" {
       "Action": "es:*",
       "Principal": "*",
       "Effect": "Allow",
-      "Resource": "arn:aws:es:${aws_region.current.name}:${data.aws_caller_identity.current.account_id}:domain/${aws_elasticsearch_domain.main.domain_name}/*"
+      "Resource": "arn:aws:es:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:domain/${aws_elasticsearch_domain.main.domain_name}/*"
     }
   ]
 }
