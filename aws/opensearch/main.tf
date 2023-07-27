@@ -1,12 +1,3 @@
-provider "aws" {
-  region = var.region
-}
-
-data "aws_region" "current" {}
-
-data "aws_caller_identity" "current" {}
-
-
 resource "aws_elasticsearch_domain" "main" {
   domain_name           = var.domain_name
   elasticsearch_version = var.engine_version
@@ -21,7 +12,13 @@ resource "aws_elasticsearch_domain" "main" {
     volume_size = var.volume_size
   }
 
-access_policies = <<POLICIES
+  depends_on = [aws_iam_role.example]
+}
+
+resource "aws_elasticsearch_domain_policy" "main_policy" {
+  domain_name = aws_elasticsearch_domain.main.domain_name
+
+  access_policies = <<POLICIES
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -34,8 +31,6 @@ access_policies = <<POLICIES
   ]
 }
 POLICIES
-
-  depends_on = [aws_iam_role.example]
 }
 
 resource "aws_iam_role" "example" {
@@ -57,5 +52,3 @@ resource "aws_iam_role" "example" {
 }
 EOF
 }
-
-
