@@ -38,11 +38,20 @@ resource "aws_elasticsearch_domain_policy" "main_policy" {
       },
       "Action": "es:ESHttp*",
       "Resource": "arn:aws:es:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:domain/${aws_elasticsearch_domain.main.domain_name}/*"
+    },
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::992927038462:user/bzamora"
+      },
+      "Action": "es:ESHttp*",
+      "Resource": "arn:aws:es:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:domain/${aws_elasticsearch_domain.main.domain_name}/*"
     }
   ]
 }
 POLICIES
 }
+
 
 
 resource "aws_iam_role" "example" {
