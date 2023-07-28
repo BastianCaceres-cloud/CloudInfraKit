@@ -85,5 +85,12 @@ resource "aws_cognito_user_pool_client" "client" {
   # Permite a los usuarios de la aplicación iniciar sesión con Cognito
   allowed_oauth_flows_user_pool_client = true
 
+  # Especifica los flujos OAuth permitidos. Puedes ajustar estos valores según tus necesidades
+  allowed_oauth_flows = ["code", "implicit"]
+
+  # Especifica los ámbitos OAuth permitidos. Puedes ajustar estos valores según tus necesidades
+  allowed_oauth_scopes = ["phone", "email", "openid", "profile", "aws.cognito.signin.user.admin"]
+
   # Aquí puedes especificar otros ajustes de la aplicación cliente según tus necesidades
 }
+
