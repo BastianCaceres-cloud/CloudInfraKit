@@ -18,8 +18,3 @@ output "opensearch_domain_endpoint" {
   value       = aws_elasticsearch_domain.main.endpoint
 }
 
-
-output "client_id" {
-  description = "El ID de la aplicación cliente de Cognito"
-  value       = aws_cognito_user_pool_client.client.id
-}
