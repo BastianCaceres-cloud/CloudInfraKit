@@ -74,3 +74,16 @@ resource "aws_iam_role_policy" "main" {
 POLICY
 }
 
+resource "aws_cognito_user_pool_client" "client" {
+  name = "mi-aplicacion-cliente"
+
+  user_pool_id = aws_cognito_user_pool.main.id
+
+  # Deshabilitar el secreto del cliente si la aplicación se va a usar con un front-end JavaScript
+  generate_secret = false
+
+  # Permite a los usuarios de la aplicación iniciar sesión con Cognito
+  allowed_oauth_flows_user_pool_client = true
+
+  # Aquí puedes especificar otros ajustes de la aplicación cliente según tus necesidades
+}
