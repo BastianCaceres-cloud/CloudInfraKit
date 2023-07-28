@@ -17,7 +17,7 @@ resource "aws_cognito_identity_pool" "main" {
   allow_unauthenticated_identities = false
 
   cognito_identity_providers {
-    client_id               = var.client_id
+    client_id               = aws_cognito_user_pool_client.client.id
     provider_name           = aws_cognito_user_pool.main.endpoint
     server_side_token_check = false
   }
