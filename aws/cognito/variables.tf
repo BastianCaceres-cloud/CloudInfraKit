@@ -30,10 +30,7 @@ variable "identity_pool_name" {
   type        = string
 }
 
-variable "client_id" {
-  description = "ID del cliente para el proveedor de identidades de Cognito"
-  type        = string
-}
+
 
 variable "iam_role_name" {
   description = "Nombre del rol de IAM para Cognito y OpenSearch"
