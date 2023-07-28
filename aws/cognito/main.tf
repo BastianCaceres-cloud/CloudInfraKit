@@ -91,6 +91,10 @@ resource "aws_cognito_user_pool_client" "client" {
   # Especifica los ámbitos OAuth permitidos. Puedes ajustar estos valores según tus necesidades
   allowed_oauth_scopes = ["phone", "email", "openid", "profile", "aws.cognito.signin.user.admin"]
 
+  # Especifica las URLs de devolución de llamada para los flujos OAuth
+  callback_urls = ["https://www.example.com/callback"]
+
   # Aquí puedes especificar otros ajustes de la aplicación cliente según tus necesidades
 }
+
 
