@@ -98,3 +98,6 @@ resource "aws_cognito_user_pool_client" "client" {
 }
 
 
+data "aws_elasticsearch_domain" "existing_domain" {
+  domain_name = var.domain_name
+}

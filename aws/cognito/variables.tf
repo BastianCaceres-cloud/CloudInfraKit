@@ -41,3 +41,9 @@ variable "iam_role_policy_name" {
   description = "Nombre de la política del rol de IAM para Cognito y OpenSearch"
   type        = string
 }
+
+
+variable "existing_domain_arn" {
+  description = "El ARN del dominio de OpenSearch existente"
+  type        = string
+}
