@@ -73,3 +73,23 @@ resource "aws_iam_role_policy" "main" {
 }
 POLICY
 }
+
+Tienes razón, mi disculpa por la confusión. En el contexto de un módulo de Terraform, efectivamente querrías que el módulo maneje la creación de la aplicación cliente de Cognito y produzca el client_id como una salida. De esta manera, el módulo es autocontenido y más fácil de usar.
+
+Para hacer esto, puedes agregar un recurso aws_cognito_user_pool_client a tu módulo. Este recurso crea una aplicación cliente en un pool de usuarios de Cognito. Aquí tienes un ejemplo de cómo podría verse esto:
+
+hcl
+Copy code
+resource "aws_cognito_user_pool_client" "client" {
+  name = "mi-aplicacion-cliente"
+
+  user_pool_id = aws_cognito_user_pool.mypool.id
+
+  # Deshabilitar el secreto del cliente si la aplicación se va a usar con un front-end JavaScript
+  generate_secret = false
+
+  # Permite a los usuarios de la aplicación iniciar sesión con Cognito
+  allowed_oauth_flows_user_pool_client = true
+
+  # Aquí puedes especificar otros ajustes de la aplicación cliente según tus necesidades
+}
