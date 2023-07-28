@@ -23,16 +23,7 @@ resource "aws_cognito_identity_pool" "main" {
   }
 }
 
-resource "aws_elasticsearch_domain" "main" {
-  domain_name = var.domain_name
 
-  cognito_options {
-    enabled          = true
-    user_pool_id     = aws_cognito_user_pool.main.id
-    identity_pool_id = aws_cognito_identity_pool.main.id
-    role_arn         = aws_iam_role.main.arn
-  }
-}
 
 resource "aws_iam_role" "main" {
   name = var.iam_role_name
@@ -67,12 +58,13 @@ resource "aws_iam_role_policy" "main" {
         "es:ESHttp*"
       ],
       "Effect": "Allow",
-      "Resource": "${aws_elasticsearch_domain.main.arn}/*"
+      "Resource": "${data.aws_elasticsearch_domain.existing_domain.arn}/*"
     }
   ]
 }
 POLICY
 }
+
 
 resource "aws_cognito_user_pool_client" "client" {
   name = "mi-aplicacion-cliente"
