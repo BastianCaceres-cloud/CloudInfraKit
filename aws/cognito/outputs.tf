@@ -13,8 +13,5 @@ output "identity_pool_id" {
   value       = aws_cognito_identity_pool.main.id
 }
 
-output "opensearch_domain_endpoint" {
-  description = "Endpoint del dominio de OpenSearch"
-  value       = aws_elasticsearch_domain.main.endpoint
-}
+
 
