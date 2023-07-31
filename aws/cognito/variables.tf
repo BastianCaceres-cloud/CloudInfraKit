@@ -47,3 +47,8 @@ variable "existing_domain_arn" {
   description = "El ARN del dominio de OpenSearch existente"
   type        = string
 }
+
+variable "user_pool_domain_name" {
+  description = "Nombre del dominio del pool de usuarios de Cognito"
+  type        = string
+}

@@ -93,3 +93,9 @@ resource "aws_cognito_user_pool_client" "client" {
 data "aws_elasticsearch_domain" "existing_domain" {
   domain_name = var.domain_name
 }
+
+
+resource "aws_cognito_user_pool_domain" "main" {
+  domain       = "mi-dominio-cognito"
+  user_pool_id = aws_cognito_user_pool.main.id
+}
