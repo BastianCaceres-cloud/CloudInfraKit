@@ -96,6 +96,6 @@ data "aws_elasticsearch_domain" "existing_domain" {
 
 
 resource "aws_cognito_user_pool_domain" "main" {
-  domain       = "mi-dominio-cognito"
+  domain       = "mi-dominio-c-opensearch-1"
   user_pool_id = aws_cognito_user_pool.main.id
 }
