@@ -18,7 +18,7 @@ resource "aws_cognito_identity_pool" "main" {
 
   cognito_identity_providers {
     client_id               = aws_cognito_user_pool_client.client.id
-    provider_name           = aws_cognito_user_pool.main.endpoint
+    provider_name = "cognito-idp.${var.region}.amazonaws.com/${aws_cognito_user_pool.main.id}"
     server_side_token_check = false
   }
 }
