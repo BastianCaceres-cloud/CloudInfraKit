@@ -1,14 +1,14 @@
 output "table_name" {
-  description = "The name of the DynamoDB table"
-  value       = aws_dynamodb_table.vault_data.name
+  description = "The name of the DynamoDB table."
+  value       = aws_dynamodb_table.vault_dynamodb_backend.name
 }
 
 output "table_arn" {
-  description = "The ARN of the DynamoDB table"
-  value       = aws_dynamodb_table.vault_data.arn
+  description = "The ARN of the DynamoDB table."
+  value       = aws_dynamodb_table.vault_dynamodb_backend.arn
 }
 
 output "table_id" {
-  description = "The ID of the DynamoDB table"
-  value       = aws_dynamodb_table.vault_data.id
+  description = "The ID of the DynamoDB table."
+  value       = aws_dynamodb_table.vault_dynamodb_backend.id
 }
