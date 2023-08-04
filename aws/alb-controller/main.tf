@@ -1,5 +1,9 @@
 data "aws_iam_policy_document" "alb_policy" {
-  statement = jsondecode(file(var.iam_policy_file))
+  statement {
+    actions   = jsondecode(file(var.iam_policy_file))["Action"]
+    resources = jsondecode(file(var.iam_policy_file))["Resource"]
+    effect    = jsondecode(file(var.iam_policy_file))["Effect"]
+  }
 }
 
 resource "aws_iam_policy" "alb_policy" {
