@@ -1,6 +1,7 @@
 data "aws_iam_policy_document" "alb_policy" {
-  source_json = file(var.iam_policy_file)
+  statement = jsondecode(file(var.iam_policy_file))
 }
+
 
 resource "aws_iam_policy" "alb_policy" {
   name   = "AWSLoadBalancerControllerIAMPolicy"
